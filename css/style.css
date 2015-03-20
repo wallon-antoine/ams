@@ -1,0 +1,56 @@
+body{
+    font-family: "Trebuchet MS",Arial,Helvetica,sans-serif;
+    background: #cdcdcd;
+    font-size: 12px;
+}
+h1 {
+    font-size: 24px;
+    border-bottom: 3px solid #ae2573;
+}
+a {
+    color: #ae2573;
+}
+
+#infologin {
+    color: #1877b9;
+    font-size: 11px;
+    margin-right: 5px;
+    text-align: right;
+    margin-top: 20px;
+}
+
+#wrapper {
+    max-width: 1003px;
+    margin: 80px auto 0;
+    padding: 10px;
+    min-height: 500px;
+    background: #fff;
+}
+
+
+
+#form-add {
+    margin: 20px;
+}
+
+#table .center  {
+    text-align: center;
+}
+
+.detailsrv {
+    cursor: help;
+}
+
+#footer {
+    max-width: 1003px;
+    margin: 0 auto;
+    margin-top:10px;
+    text-align: center;
+}
+
+.form-group.required .control-label:after { 
+    color: #d00;
+    content: "*";
+    position: absolute;
+    margin-left: 5px;
+}
