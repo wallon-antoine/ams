@@ -56,16 +56,20 @@ class Server extends CI_Controller {
 					  $this->input->post('type_machine'),
 					  $this->input->post('id_groupes')
 	      );
+              $server_id = $this->db->insert_id();
+              
             // Ajout des référents dans la table users  
             $referent=$this->ldap->search_entry($this->input->post('referent'),'uid');
-            $this->Users->create($referent[0]['uid'][0],$referent[0]['mail'][0]);
+            $this->_sendmail($referent[0]['mail'][0],$server_id,$this->input->post('nom'),"add");
             
-            $referent2=$this->ldap->search_entry($this->input->post('referent2'),'uid');
-            $this->Users->create($referent2[0]['uid'][0],$referent2[0]['mail'][0]);              
-
-            $referent3=$this->ldap->search_entry($this->input->post('referent3'),'uid');
-            $this->Users->create($referent3[0]['uid'][0],$referent3[0]['mail'][0]);     
-              
+            if($this->input->post('referent2')) {
+                $referent2=$this->ldap->search_entry($this->input->post('referent2'),'uid');              
+                $this->_sendmail($referent[0]['mail'][0],$server_id,$this->input->post('nom'),"add");
+            }
+            if($this->input->post('referent3')) {
+                $referent3=$this->ldap->search_entry($this->input->post('referent3'),'uid');
+                $this->_sendmail($referent[0]['mail'][0],$server_id,$this->input->post('nom'),"add");            
+            }
 	      $data['title'] = "ajout d'un server dans la base"; 
               $data['user'] = $this->cas->user()->userlogin;  
 	      $this->load->view('themes/header', $data);
@@ -167,6 +171,20 @@ class Server extends CI_Controller {
                                             $this->input->post('id_groupes'),
                                             $ids
                 );
+                
+            // Récupération des référents pour l'envoi de mail 
+            $referent=$this->ldap->search_entry($this->input->post('referent'),'uid');
+            $this->_sendmail($referent[0]['mail'][0],$ids,$this->input->post('nom'),"edit");
+            
+            if($this->input->post('referent2')) {
+                $referent2=$this->ldap->search_entry($this->input->post('referent2'),'uid');           
+                $this->_sendmail($referent[0]['mail'][0],$ids,$this->input->post('nom'),"edit");
+            }
+            if($this->input->post('referent3')) {
+                $referent3=$this->ldap->search_entry($this->input->post('referent3'),'uid');
+                $this->_sendmail($referent[0]['mail'][0],$ids,$this->input->post('nom'),"edit");            
+            }                  
+                
 	      $data['title'] = "edition d'une fiche"; 
               $data['user'] = $this->cas->user()->userlogin;  
 	      $this->load->view('themes/header', $data);
@@ -180,7 +198,40 @@ class Server extends CI_Controller {
 	else {
 	 show_404();
 	}
-   }   
+   }
+   /*
+    * Envoie de mail lors d'un ajout ou d'une modification de fiche
+    * @todo
+    * @param string mail
+    * @param int $ids
+    * @param string name
+    * @param string type
+    */
+   
+   private function _sendmail($mail,$ids,$name,$type){
+        $this->load->library('email');
+        $config['mailtype'] = 'html';
+        $this->email->initialize($config);       
+       
+       
+        if($type == "add") {
+            
+            $this->email->from($this->config->item('email_from'), $this->config->item('email_from_name'));
+            $this->email->to($mail);
+
+            $this->email->subject("[AMS] Nouveau serveur d'on vous êtes référent vient d'être créée");
+            $this->email->message('Vous venez de recevoir ce message car une personne vient de vous désigner référent pour le nouveau serveur '.$name."<br />voici l'url <a href='". base_url('server/edit/'.$ids)."'>". base_url('server/edit/'.$ids)."</a>");
+            $this->email->send();           
+        }
+        else {
+            $this->email->from($this->config->item('email_from'), $this->config->item('email_from_name'));
+            $this->email->to($mail);
+
+            $this->email->subject("[AMS] Nouveau serveur d'on vous êtes référent vient d'être modifié");
+            $this->email->message('Vous venez de recevoir ce message car une personne vient de vous désigner référent pour le serveur '.$name."<br />Pour voir les modifications effectués cliquez sur ce lien : <a href='". base_url('server/edit/'.$ids)."'>". base_url('server/edit/'.$ids)."</a>");
+            $this->email->send();                
+        }
+   }
 
    
 }

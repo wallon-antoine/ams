@@ -26,7 +26,7 @@ class Ldap {
         
         
         public function search_entry($filter,$type) {
-            $justthese = array("sn", "givenname", "uid");
+            $justthese = array("sn", "givenname", "uid", "mail");
             $read = ldap_search($this->connect(), "ou=People,".$this->CI->config->item('basedn'), $type."=".$filter,$justthese);
             $info = ldap_get_entries($this->connect(), $read);
             if ($info != NULL) {
