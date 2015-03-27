@@ -16,18 +16,12 @@
             <table class="table table-hover table-condensed">
                 <thead>
                     <th>
-                        Id du service
-                    </th>
-                    <th>
                         Nom du service :
                     </th>                  
                 </thead>
                 <tbody>
                     <?php foreach ($services->result_array() as $service): ?>
                           <tr>
-                            <td>
-                                <?php echo $service['id_service']; ?>
-                            </td>
                             <td>
                                 <input type="text" onchange="ConfigGroupe('<?php echo $service['id_service']; ?>',this.value)" class="form-control" value="<?php echo $service['service']; ?>"  />
                             </td>
