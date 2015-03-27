@@ -20,6 +20,48 @@ class Ams extends CI_Model {
 	    return $query;
         }
 /**
+ * Ajoute un groupe
+ *
+ * Ajoute un groupe
+ *
+ * @access	public
+ */        
+        public function add_groupes($name) {
+            $this->db->where('service', $name);
+            $this->db->from('groupes');
+            $user_exist=$this->db->count_all_results();
+        
+            if($user_exist == 0) {
+                $data = array(
+                    'service' => $name
+                    
+                );
+                $this->db->insert('groupes', $data);
+            }
+        }   
+/**
+ * Ajoute un groupe
+ *
+ * Ajoute un groupe
+ *
+ * @access	public
+ */          
+        
+	public function delete_groupe($ids) {
+		$this->db->delete('groupes', array('id_service' => $ids)); 
+	} 
+    /*
+     * ajoute l'utilisateur à un service 
+     */
+    public function update_groupe($id,$service) {
+
+        $data = array(
+	            'service' => $service
+                );
+	$this->db->where('id_service',$id);
+        $this->db->update('groupes', $data);	
+    }        
+/**
  * Ressort la liste des roles
  *
  *

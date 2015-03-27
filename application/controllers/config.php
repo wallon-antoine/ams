@@ -5,6 +5,7 @@ class Config extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->library('cas');
+        $this->load->model('ams');
         $this->cas->force_auth();
         $this->Users->create();
     }
@@ -30,15 +31,22 @@ class Config extends CI_Controller {
         $data['user'] = $this->cas->user()->userlogin;
         $data['users']= $this->Users->liste();
         $data['services']=$this->Ams->get_groupes();
-        $this->load->view('themes/header', $data);
-	$this->load->view('config/groupes',$data);
-	$this->load->view('themes/footer');
         
-        if($this->input->post('addGroup')) {
-            
+        
+	if($this->input->get('delete')) {
+	       $this->ams->delete_groupe($this->input->get('delete'));
+               redirect('config/groupes', 'refresh');
+	}
+        
+        if($this->input->post('name')) {
+            $this->ams->add_groupes($this->input->post("name"));
+            redirect('config/groupes', 'refresh');
         }
-        
-        
+        else {
+            $this->load->view('themes/header', $data);
+            $this->load->view('config/groupes',$data);
+            $this->load->view('themes/footer');        
+        }
         }
         else {
             show_error("You have insufficient privileges to view this page",403);

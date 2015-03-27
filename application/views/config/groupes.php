@@ -20,7 +20,7 @@
                     </th>
                     <th>
                         Nom du service :
-                    </th>
+                    </th>                  
                 </thead>
                 <tbody>
                     <?php foreach ($services->result_array() as $service): ?>
@@ -29,31 +29,25 @@
                                 <?php echo $service['id_service']; ?>
                             </td>
                             <td>
-                                <input type="text" class="form-control" value="<?php echo $service['service']; ?>" />
-                            </td>                  
+                                <input type="text" onchange="ConfigGroupe('<?php echo $service['id_service']; ?>',this.value)" class="form-control" value="<?php echo $service['service']; ?>"  />
+                            </td>
+                            <td>
+                                <td class="center"><a href="?delete=<?php echo $service['id_service']; ?>" onclick="return(confirm('Etes-vous sûr de vouloir supprimer cette entrée?'));"><span class="glyphicon  glyphicon-trash" aria-hidden="true"></span></a></td>
+                            </td>                              
                           </tr>
                     <?php endforeach; ?>
-<!--                          <tr>
-                              <td>
-                                  
-                                  <button class="add_field_button btn btn-default">Ajouter un nouveau groupe</button>
-                              </td>
-                              <td>
-                                    <span class="input_fields_wrap"> </span>
-                              </td>
-                          </tr>-->
                 </tbody>    
             </table>
         </div>
             <div id="addgroupe" class="tab-pane fade">
                 <div class="col-md-8">
                     <div class="form-group tab-content">
-                        <form class="form-inline" name="addGroup" action="<?php echo base_url("config/groupes"); ?>" method="post">
+                        <form class="form-inline" action="<?php echo base_url("config/groupes"); ?>" method="post">
                             <div class="form-group">
                                 <label for="exampleInputName2">Nom du groupe</label>
-                                <input type="text" class="form-control" id="exampleInputName2" placeholder="ex: Réseau">
+                                <input type="text" name="name" class="form-control" id="exampleInputName2" placeholder="ex: Réseau">
                             </div>
-                            <button type="submit" class="btn btn-default">Créer</button>
+                            <button type="submit" name="addgroup" class="btn btn-default">Créer</button>
                         </form>    
                     </div>  
                 </div>

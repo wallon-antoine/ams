@@ -13,6 +13,11 @@ class Ajax extends CI_Controller {
                 $this->Users->update_user_id_groupes($this->input->post('id'),$this->input->post('value'));
             }
     }
+    public function configgroupe() {
+            if($this->input->post()) {
+                $this->Ams->update_groupe($this->input->post('id'),$this->input->post('value'));
+            }
+    }    
     public function configrole() {
             if($this->input->post()) {
                 $this->Users->update_user_id_role($this->input->post('id'),$this->input->post('value'));
