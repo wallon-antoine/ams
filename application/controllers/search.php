@@ -9,6 +9,7 @@ class Search extends CI_Controller {
       $this->load->library('cas');
       $this->cas->force_auth();
       $this->Users->create();
+        $this->load->model('Search_model');       
       $this->load->library('form_validation');  
       $this->load->helper(array('form', 'url'));
    }
@@ -20,7 +21,8 @@ class Search extends CI_Controller {
         $data['titre']='Résultat de la recherche pour "'.$search_term.'"';
         $data['search_term']=$search_term;
         // Use a model to retrieve the results.
-        $data['results'] = $this->search_model->get_results($search_term);
+        $data['results'] = $this->Search_model->get_results($search_term);
+
         $data['title'] = "Résultat de la recherche";
         $data['user'] = $this->cas->user()->userlogin;
         $this->load->view('themes/header', $data);
@@ -49,7 +51,7 @@ class Search extends CI_Controller {
             $data['title'] = "Résultat de la recherche";
             $data['titre']='Résultat de la recherche multicritère';
             // Use a model to retrieve the results.
-            $data['results'] = $this->search_model->avanced($this->input->get('nom'),$this->input->get('distrib'),$this->input->get('ip'),$this->input->get('referent'));
+            $data['results'] = $this->Search_model->advanced($this->input->get('nom'),$this->input->get('distrib'),$this->input->get('ip'),$this->input->get('referent'));
              $data['search_term']="";
             $this->load->view('search/result', $data);
         }

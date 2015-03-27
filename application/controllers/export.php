@@ -10,7 +10,8 @@ class Export extends CI_Controller
         $this->cas->force_auth();
         $this->Users->create();        
         $this->load->helper('url');
-	$this->load->model('Servers');;        
+	$this->load->model('Servers'); 
+        $this->load->model('Search_model'); 
         $this->load->dbutil();
     }
 
@@ -21,11 +22,11 @@ class Export extends CI_Controller
         
 	if(is_role() == 1 || is_role() == 4) {
 
-            if ($this->input->get('nom') == FALSE || $this->input->get('distrib') == FALSE || $this->input->get('ip') == FALSE) {
+            if ($this->input->get('nom') == FALSE && $this->input->get('distrib') == FALSE && $this->input->get('ip') == FALSE) {
                 $query=$this->Servers->get_servers($id_groupes);
             }
             else {
-                $query = $this->search_model->avanced($this->input->get('nom'),$this->input->get('distrib'),$this->input->get('ip'),$this->input->get('referent'));
+                $query = $this->Search_model->advanced_export($this->input->get('nom'),$this->input->get('distrib'),$this->input->get('ip'),$this->input->get('referent'));
             }
             
             $delimiter = ",";
@@ -39,11 +40,14 @@ class Export extends CI_Controller
         header('Content-Disposition: attachement; filename="ams_'.date('dMy').'.xml"');
 	if($id_groupes == $this->Users->get_info()->id_groupe || is_admin()) {
             
-            if ($this->input->get('nom') == FALSE || $this->input->get('distrib') == FALSE || $this->input->get('ip') == FALSE) {
+            if ($this->input->get('nom') == "" && $this->input->get('distrib') == "" && $this->input->get('ip') == "") {
                 $query=$this->Servers->get_servers($id_groupes);
+                
             }
             else {
-                $query = $this->search_model->avanced($this->input->get('nom'),$this->input->get('distrib'),$this->input->get('ip'),$this->input->get('referent'));
+                
+                $query = $this->Search_model->advanced_export($this->input->get('nom'),$this->input->get('distrib'),$this->input->get('ip'),$this->input->get('referent'));
+                
             }
             
             $config = array (

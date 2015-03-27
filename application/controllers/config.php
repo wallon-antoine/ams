@@ -33,6 +33,12 @@ class Config extends CI_Controller {
         $this->load->view('themes/header', $data);
 	$this->load->view('config/groupes',$data);
 	$this->load->view('themes/footer');
+        
+        if($this->input->post('addGroup')) {
+            
+        }
+        
+        
         }
         else {
             show_error("You have insufficient privileges to view this page",403);

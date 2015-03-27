@@ -121,7 +121,8 @@ this.value = terms.join( ", " );
 return false;
 }
 });
-});      
+});
+
     </script>
 </head>
 

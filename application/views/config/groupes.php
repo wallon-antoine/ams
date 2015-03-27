@@ -33,13 +33,22 @@
                             </td>                  
                           </tr>
                     <?php endforeach; ?>
+<!--                          <tr>
+                              <td>
+                                  
+                                  <button class="add_field_button btn btn-default">Ajouter un nouveau groupe</button>
+                              </td>
+                              <td>
+                                    <span class="input_fields_wrap"> </span>
+                              </td>
+                          </tr>-->
                 </tbody>    
             </table>
         </div>
             <div id="addgroupe" class="tab-pane fade">
                 <div class="col-md-8">
                     <div class="form-group tab-content">
-                        <form class="form-inline">
+                        <form class="form-inline" name="addGroup" action="<?php echo base_url("config/groupes"); ?>" method="post">
                             <div class="form-group">
                                 <label for="exampleInputName2">Nom du groupe</label>
                                 <input type="text" class="form-control" id="exampleInputName2" placeholder="ex: Réseau">
