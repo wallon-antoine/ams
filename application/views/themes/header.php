@@ -184,7 +184,8 @@ return false;
 
                                  echo form_input($data);
                                  ?>
-                                 <input type="submit"  value="OK" class="btn btn-default" />
+                                <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
+                                 
                             </form>
                         </div>
                     
