@@ -40,8 +40,8 @@
                 <label class="col-md-4 control-label">
                         &nbsp;
                 </label>            
-            <div class="col-md-6">    
-        <?php echo form_submit('submit', 'Recherche','class="btn btn-primary"'); ?>
+            <div class="col-md-6">  
+                <input type="submit"  value="Recherche" class="btn btn-primary" />
             </div>
         </div>
     </div>

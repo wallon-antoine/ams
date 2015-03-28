@@ -34,7 +34,7 @@
             <td><?php echo  $row['nom']; ?></td>
             <td><?php echo  $row['ip']; ?></td>
             <td><?php echo  $row['referent']; ?></a></td>
-           <td class="center"><a href="<?php echo base_url("server/edit/".$row['ids']); ?>"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a></td>
+           <td class="center"><a href="<?php echo base_url("server/edit/".$row['ids']); ?>"><span class="glyphicon <?php echo $logodetail; ?>" aria-hidden="true"></span></a></td>
            <td class="center"><a href="?delete=<?php echo $row['ids']; ?>" onclick="return(confirm('Etes-vous sûr de vouloir supprimer cette entrée?'));"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a></td>
         </tr>
 

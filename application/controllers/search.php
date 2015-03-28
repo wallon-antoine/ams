@@ -44,7 +44,7 @@ class Search extends CI_Controller {
 	    $this->form_validation->set_rules('referent', 'Referent', 'trim');
         
         
-        if ($this->input->get('submit') == FALSE) {
+        if ($this->input->get('nom') == NULL && $this->input->get('distrib') == NULL && $this->input->get('ip') == NULL && $this->input->get('referent') == NULL) {
             $this->load->view('search/form', $data);
         }
         else {
