@@ -29,7 +29,7 @@
     <?php
     foreach ($liste_servers->result_array() as $row)
     {
-        if(is_role() != 1 && $row['referent'] !== $user) { 
+        if(is_role() != 1 && $row['referent'] !== $user && is_role() == 3) { 
             $logodetail= "glyphicon-info-sign";
         }
         else {

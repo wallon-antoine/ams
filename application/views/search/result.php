@@ -22,7 +22,7 @@
     <?php
     foreach ($results as $row)
     {
-        if($row['referent'] !== $user) { 
+        if(is_role() != 1 && $row['referent'] !== $user && is_role() == 3) { 
             $logodetail= "glyphicon-info-sign";
         }
         else {
