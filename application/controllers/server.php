@@ -117,9 +117,15 @@ class Server extends CI_Controller {
             $data['user'] = $this->cas->user()->userlogin;
             
 	    if($this->input->get('delete')) {
-	       $data['status'] = "Entrée supprimé";
-	       $this->Servers->delete($this->input->get('delete'));
-               redirect('/server/liste', 'refresh');
+                if(is_role() == 1 && is_role() == 4 && $this->Servers->get_server($this->input->get('delete'))->groupe == $this->Users->get_info()->id_groupe) { 
+                    $data['status'] = "Entrée supprimé";
+                    $this->Servers->delete($this->input->get('delete'));
+                    redirect('/server/liste', 'refresh');
+                }
+                else {
+                    $this->Mail->sendmail($this->config->item('email_admin'),array('user' => $this->cas->user()->userlogin,'url'=>current_url()),'Accès non autorisé','403');
+                    show_error("You have insufficient privileges to view this page",403);
+                }                 
 	    }
 	    $data['user'] = $this->cas->user()->userlogin;
 	    $this->load->view('themes/header', $data);

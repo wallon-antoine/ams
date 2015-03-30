@@ -31,11 +31,13 @@
     {
         if(is_role() != 1 && $row['referent'] !== $user && is_role() == 3) { 
             $logodetail= "glyphicon-info-sign";
-            $titre="Voir la fiche";            
+            $titre="Voir la fiche"; 
+            $edit=FALSE;
         }
         else {
                 $logodetail= "glyphicon-pencil";
                 $titre="Editer la fiche";
+                $edit=TRUE;
         }
     ?>
 
@@ -45,7 +47,7 @@
             <td><?php echo  $row['referent']; ?></td>
             
            <td class="center"><a href="<?php echo base_url("server/edit/".$row['ids']); ?>"><span class="glyphicon <?php echo $logodetail; ?>" aria-hidden="true" rel="tooltip" title="<?php echo  $titre; ?>"></span></a></td>
-           <td class="center"><a href="?delete=<?php echo $row['ids']; ?>" onclick="return(confirm('Etes-vous sûr de vouloir supprimer cette entrée?'));"><span class="glyphicon  glyphicon-trash" aria-hidden="true" rel="tooltip" title="Supprimer l'entrée <?php echo  $row['nom']; ?>"></span></a></td>
+           <td class="center"><?php if($edit): ?><a href="?delete=<?php echo $row['ids']; ?>" onclick="return(confirm('Etes-vous sûr de vouloir supprimer cette entrée?'));"><span class="glyphicon  glyphicon-trash" aria-hidden="true" rel="tooltip" title="Supprimer l'entrée <?php echo  $row['nom']; ?>"></span></a><?php endif; ?></td>
            
         </tr>
 
