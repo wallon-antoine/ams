@@ -12,7 +12,7 @@
 //Si admin ou referent de la fiche ou chef de service on peut editer la fiche 
 if(is_admin() || $server->referent == $user || is_role() == 4):     
 ?> 
-  <form action="<?php echo base_url("server/edit/".$ids); ?>" method="post" accept-charset="utf-8" role="form">
+  <form id="ajaxform" action="<?php echo base_url("server/edit/".$ids); ?>" method="post" accept-charset="utf-8" role="form">
 <?php endif; ?>
 
        

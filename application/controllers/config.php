@@ -22,6 +22,7 @@ class Config extends CI_Controller {
             $this->load->view('themes/footer');
         }
         else {
+            $this->Mail->sendmail($this->config->item('email_admin'),array('user' => $this->cas->user()->userlogin),'Accès non autorisé','403');
             show_error("You have insufficient privileges to view this page",403);
         }        
     }
@@ -49,6 +50,7 @@ class Config extends CI_Controller {
         }
         }
         else {
+            $this->Mail->sendmail($this->config->item('email_admin'),array('user' => $this->cas->user()->userlogin),'Accès non autorisé','403');
             show_error("You have insufficient privileges to view this page",403);
         }          
     }    
