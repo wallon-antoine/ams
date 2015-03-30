@@ -117,7 +117,7 @@ class Server extends CI_Controller {
             $data['user'] = $this->cas->user()->userlogin;
             
 	    if($this->input->get('delete')) {
-                if(is_role() == 1 && is_role() == 4 && $this->Servers->get_server($this->input->get('delete'))->groupe == $this->Users->get_info()->id_groupe) { 
+                if((is_admin() == 1 || is_role() == 4) && $this->Servers->get_server($this->input->get('delete'))->groupe == $this->Users->get_info()->id_groupe) { 
                     $data['status'] = "Entrée supprimé";
                     $this->Servers->delete($this->input->get('delete'));
                     redirect('/server/liste', 'refresh');
