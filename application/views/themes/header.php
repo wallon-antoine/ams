@@ -12,19 +12,19 @@
     <link rel="stylesheet" href="<?php echo base_url("plugins/bootstrap/bootstrap-theme.min.css"); ?>" />
 
     <link rel="stylesheet" href="<?php echo base_url("css/style.css"); ?>" />
-    <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+    <script src="<?php echo base_url("plugins/jquery/js/jquery-1.11.2.min.js"); ?>"></script>
     <script src="<?php echo base_url("plugins/bootstrap/bootstrap.min.js"); ?>"></script>
     
     <!--datatables-->
     <link rel='stylesheet' href="<?php echo base_url("plugins/dataTables/css/jquery.dataTables.css"); ?>" />
     <script src="<?php echo base_url("plugins/dataTables/js/jquery.dataTables.min.js"); ?>"></script>
     <!--datatables responsive-->
-    <link rel='stylesheet' href="//cdn.datatables.net/responsive/1.0.3/css/dataTables.responsive.css" />
-    <script src="//cdn.datatables.net/responsive/1.0.3/js/dataTables.responsive.js"></script>    
+    <link rel='stylesheet' href="<?php echo base_url("plugins/dataTables/css/dataTables.responsive.css"); ?>" />
+    <script src="<?php echo base_url("plugins/dataTables/js/dataTables.responsive.js"); ?>"></script>    
     
 <!-- Jquery ui-->
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
-    <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+    <link rel="stylesheet" href="<?php echo base_url("plugins/jquery/css/jquery-ui.css"); ?>">
+    <script src="<?php echo base_url("plugins/jquery/js/jquery-ui.js"); ?>"></script>
 <!-- Ams -->    
     <script src="<?php echo base_url("plugins/ams/js/common.js"); ?>"></script>
 

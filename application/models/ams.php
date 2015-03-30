@@ -48,7 +48,7 @@ class Ams extends CI_Model {
  */          
         
 	public function delete_groupe($ids) {
-		$this->db->delete('groupes', array('id_service' => $ids)); 
+            $this->db->delete('groupes', array('id_service' => $ids)); 
 	} 
     /*
      * ajoute l'utilisateur à un service 
@@ -94,5 +94,28 @@ class Ams extends CI_Model {
             else {
                 return "le CRI ";
             }
-        }        
+        }
+/**
+ * select count
+ * @param sting $table
+ * @param sting $column
+ * @param string $search
+ * @return int
+ */        
+        public function count($table,$column = NULL,$search =NULL) {
+            if($column && $search) {
+                $this->db->like($column, $search);
+            }
+            $this->db->from($table);
+            return $this->db->count_all_results();            
+        }
+        
+        public function count_nb_referent($name) {
+
+            $this->db->like('referent', $name);
+            $this->db->or_like('referent2', $name);
+            $this->db->or_like('referent3', $name);
+            $this->db->from('servers');
+            return $this->db->count_all_results();            
+        }          
 }

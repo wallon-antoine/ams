@@ -9,8 +9,21 @@
 
             </div>
         <?php endif; ?>
-        <p>Cette application permet d'avoir la liste des serveurs du CRI ainsi que leurs descriptions</p>        
+                <?php if(is_groupe()): ?>
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Statistiques</h3>
+                </div>
+                <div class="panel-body">
+                    <ul>
+                        <li>Nombre total de serveurs dans la base : <b><?php echo $nbserver; ?></b></li>
+                        <li>Nombre total de serveurs dans le service : <b><?php echo $nbserver_service; ?></b></li>
+                        <li>Nombre total de serveurs d'on vous êtes le référent  : <b><?php echo $nbserver_referent; ?></b></li>
+                    </ul>
+                </div>    
+            </div>
     </div>
+    <?php endif; ?>
     <div class="col-md-4">
         <?php if(is_groupe()): ?>
             <div class="panel panel-primary">

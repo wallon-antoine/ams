@@ -25,6 +25,9 @@ class Welcome extends CI_Controller {
 		$this->Users->create();
 		$head['user'] = $this->cas->user()->userlogin;
                 $data['last_servers']= $this->Servers->last_servers();
+                $data['nbserver']=$this->Ams->count('servers');
+                $data['nbserver_service']=$this->Ams->count('servers','groupe',is_groupe());
+                $data['nbserver_referent']=$this->Ams->count_nb_referent($this->cas->user()->userlogin);
 		$head['title'] = "Bienvenue"; 
 		$this->load->view('themes/header', $head);
 		$this->load->view('accueil',$data);
