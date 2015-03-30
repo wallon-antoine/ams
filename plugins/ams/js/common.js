@@ -51,6 +51,11 @@ function success(info) {
     $.noty.consumeAlert({layout: 'topCenter', type: 'success', dismissQueue: true, timeout: 1500 , closeWith: ['hover']});
     alert(info);
 }
+function error(info) {
+    $.noty.consumeAlert({layout: 'topCenter', type: 'error', dismissQueue: true, timeout: 3000 , closeWith: ['hover']});
+    alert(info);
+}
+
 $(document).ready(function(){
     var rowNum = 0;
     function addRow(frm) {
@@ -63,5 +68,28 @@ $(document).ready(function(){
     }
 });
 
+
+$(document).ready(function() {
+    $('#ajaxform').on('submit', function(e) {
+        e.preventDefault(); // J'empêche le comportement par défaut du navigateur, c-à-d de soumettre le formulaire
+ 
+        var $this = $(this);
+ 
+            $.ajax({
+                url: $this.attr('action'),
+                type: $this.attr('method'),
+                data: $this.serialize(),
+                dataType: 'json', // JSON
+                success: function(json) {
+                    if(json.reponse === 'send') {
+                        success("La mise à jour à été effectué");
+                    } else {
+                        error('Erreur : '+ json.reponse);
+                    }
+                }
+            });
+        
+    });
+});
 
 
